@@ -1,4 +1,7 @@
-const Status = require('./status.scheme')
+const Status = require('./status.scheme');
+const {
+    validationResult
+} = require('express-validator');
 
 exports.findAll = (req, res, next) => {
     const q = req.query;
@@ -24,51 +27,79 @@ exports.findAll = (req, res, next) => {
 }
 
 exports.findById = (req, res, next) => {
-    const id = req.params.id
-    Status.findById(id)
-        .then(status => {
-            res.json(status);
-        })
-        .catch(err => next(err));
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const id = req.params.id
+        Status.findById(id)
+            .then(status => {
+                res.json(status);
+            })
+            .catch(err => next(err));
+    }
 }
 
 exports.insert = (req, res, next) => {
-    const data = req.body;
-    Status.create(data)
-        .then(status => {
-            res.json({
-                message: `Data status baru ditambahkan!`,
-                data: status
-            });
-        })
-        .catch(err => next(err))
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const data = req.body;
+        Status.create(data)
+            .then(status => {
+                res.json({
+                    message: `Data status baru ditambahkan!`,
+                    data: status
+                });
+            })
+            .catch(err => next(err));
+    }
 }
 
 exports.updateById = (req, res, next) => {
-    const id = req.params.id
-    const data = req.body
-    Status.findByIdAndUpdate(id, data, {
-            new: true
-        })
-        .then(status => {
-            res.json({
-                message: `Data status ${id} diperbarui!`,
-                data: status
-            });
-        })
-        .catch(err => next(err))
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const id = req.params.id
+        const data = req.body
+        Status.findByIdAndUpdate(id, data, {
+                new: true
+            })
+            .then(status => {
+                res.json({
+                    message: `Data status ${id} diperbarui!`,
+                    data: status
+                });
+            })
+            .catch(err => next(err))
+    }
 }
 
 exports.removeById = (req, res, next) => {
-    const id = req.params.id
-    Status.findByIdAndRemove(id)
-        .then(status => {
-            res.json({
-                message: `Data status ${id} dihapus!`,
-                data: status
-            });
-        })
-        .catch(err => next(err))
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const id = req.params.id
+        Status.findByIdAndRemove(id)
+            .then(status => {
+                res.json({
+                    message: `Data status ${id} dihapus!`,
+                    data: status
+                });
+            })
+            .catch(err => next(err));
+    }
 }
 
 exports.remove = (req, res, next) => {

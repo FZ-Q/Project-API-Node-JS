@@ -1,16 +1,21 @@
 const express = require('express');
-const router = express.Router();
-
-const c = require('./status.controller');
 const {
     auth
 } = require('../../../secret');
+const {
+    validation,
+    paramValidation
+} = require('./users.validation')
+const router = express.Router();
+
+const c = require('./status.controller');
+
 
 router.get('/', auth, c.findAll)
-router.get('/:id', auth, c.findById)
-router.post('/', auth, c.insert)
-router.put('/:id', auth, c.updateById)
+router.get('/:id', auth, paramValidation, c.findById)
+router.post('/', auth, validation, c.insert)
+router.put('/:id', auth, paramValidation, validation, c.updateById)
 router.delete('/', auth, c.remove)
-router.delete('/:id', auth, c.removeById)
+router.delete('/:id', auth, paramValidation, c.removeById)
 
 module.exports = router;
