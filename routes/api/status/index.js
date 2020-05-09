@@ -5,7 +5,7 @@ const {
 const {
     validation,
     paramValidation
-} = require('./users.validation')
+} = require('./status.validation')
 const router = express.Router();
 
 const c = require('./status.controller');
