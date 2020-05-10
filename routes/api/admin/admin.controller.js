@@ -1,6 +1,9 @@
 const Admin = require('./admin.scheme')
 const passwordHash = require('password-hash')
 const createError = require('http-errors')
+const {
+    validationResult
+} = require('express-validator');
 
 exports.findAll = (req, res, next) => {
     const q = req.query;
@@ -25,54 +28,82 @@ exports.findAll = (req, res, next) => {
 }
 
 exports.findById = (req, res, next) => {
-    const id = req.params.id
-    Admin.findById(id)
-        .then(admin => {
-            res.json(admin);
-        })
-        .catch(err => next(err));
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const id = req.params.id
+        Admin.findById(id)
+            .then(admin => {
+                res.json(admin);
+            })
+            .catch(err => next(err));
+    }
 }
 
 exports.insert = (req, res, next) => {
-    const data = req.body;
-    data.password = passwordHash.generate(data.password);
-    Admin.create(data)
-        .then(admin => {
-            res.json({
-                message: `Data admin baru ditambahkan!`,
-                data: admin
-            });
-        })
-        .catch(err => next(err))
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const data = req.body;
+        data.password = passwordHash.generate(data.password);
+        Admin.create(data)
+            .then(admin => {
+                res.json({
+                    message: `Data admin baru ditambahkan!`,
+                    data: admin
+                });
+            })
+            .catch(err => next(err));
+    }
 }
 
 exports.updateById = (req, res, next) => {
-    const id = req.params.id
-    const data = req.body
-    if (req.body.password)
-        data.password = passwordHash.generate(req.body.password);
-    Admin.findByIdAndUpdate(id, data, {
-            new: true
-        })
-        .then(admin => {
-            res.json({
-                message: `Data admin ${id} diperbarui!`,
-                data: admin
-            });
-        })
-        .catch(err => next(err))
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const id = req.params.id
+        const data = req.body
+        if (req.body.password)
+            data.password = passwordHash.generate(req.body.password);
+        Admin.findByIdAndUpdate(id, data, {
+                new: true
+            })
+            .then(admin => {
+                res.json({
+                    message: `Data admin ${id} diperbarui!`,
+                    data: admin
+                });
+            })
+            .catch(err => next(err));
+    }
 }
 
 exports.removeById = (req, res, next) => {
-    const id = req.params.id
-    Admin.findByIdAndRemove(id)
-        .then(admin => {
-            res.json({
-                message: `Data admin ${id} dihapus!`,
-                data: admin
-            });
-        })
-        .catch(err => next(err))
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            errors: errors.array()
+        });
+    } else {
+        const id = req.params.id
+        Admin.findByIdAndRemove(id)
+            .then(admin => {
+                res.json({
+                    message: `Data admin ${id} dihapus!`,
+                    data: admin
+                });
+            })
+            .catch(err => next(err));
+    }
 }
 
 exports.remove = (req, res, next) => {
@@ -102,4 +133,10 @@ exports.login = (email, password) => {
                 }
             })
     })
+}
+
+exports.findByEmail = (value) => {
+    return Admin.findOne({
+        email: value
+    });
 }

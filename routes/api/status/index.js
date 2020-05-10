@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const {
     auth
 } = require('../../../secret');
@@ -6,7 +7,6 @@ const {
     validation,
     paramValidation
 } = require('./status.validation')
-const router = express.Router();
 
 const c = require('./status.controller');
 

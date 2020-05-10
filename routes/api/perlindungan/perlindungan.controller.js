@@ -80,3 +80,7 @@ exports.remove = (req, res, next) => {
         })
         .catch(err => next(err))
 }
+
+exports.cekPerlindunganId = (id) => {
+    return Perlindungan.findById(id);
+}

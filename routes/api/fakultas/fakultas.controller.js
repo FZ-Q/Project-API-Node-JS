@@ -80,3 +80,7 @@ exports.remove = (req, res, next) => {
         })
         .catch(err => next(err))
 }
+
+exports.cekFakultasId = (id) => {
+    return Fakultas.findById(id);
+}

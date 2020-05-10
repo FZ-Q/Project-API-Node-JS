@@ -112,3 +112,7 @@ exports.remove = (req, res, next) => {
         })
         .catch(err => next(err))
 }
+
+exports.cekStatusId = (id) => {
+    return Status.findById(id);
+}
