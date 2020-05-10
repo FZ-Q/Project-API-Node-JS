@@ -23,7 +23,7 @@ describe("Login", () => {
 })
 
 let idStatus;
-describe("Status Endpoint dengan Autentikasi dan Id", () => {
+describe("Status Endpoint With Auth and Id", () => {
     it("should get all status", (done) => {
         chai.request(server)
             .get('/api/status')
