@@ -1,15 +1,13 @@
-const express = require('express')
-const fs = require('fs')
-const projectName = process.env.npm_package_name
-const debug = require('debug')(`${projectName}:api`)
-const router = express.Router()
-const files = fs.readdirSync(__dirname)
+var express = require('express');
+var router = express.Router();
 
-files.forEach(endpoint => {
-    if (endpoint != 'index.js') {
-        debug(endpoint);
-        router.use(`/${endpoint}`, require(`./${endpoint}`))
-    }
-})
+/* GET home page. */
+router.get('/', function (req, res, next) {
+  res.render('index', {
+    title: 'Express'
+  });
+});
+router.use('/api', require('./api'))
+router.use('/auth', require('./auth'))
 
-module.exports = router
+module.exports = router;
