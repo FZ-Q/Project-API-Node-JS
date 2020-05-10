@@ -4,7 +4,7 @@ const {
 } = require('express-validator');
 exports.validation = [
     body('status').trim().escape(),
-    body('deskripsi').trim().escape()
+    body('deskripsi').escape()
 ]
 
 exports.paramValidation = [
