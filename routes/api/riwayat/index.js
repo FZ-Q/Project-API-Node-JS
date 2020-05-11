@@ -10,7 +10,7 @@ const {
 
 const c = require('./riwayat.controller');
 
-router.get('/', c.findAll)
+router.get('/', auth, c.findAll)
 router.get('/:id', paramValidation, c.findById)
 router.post('/', validation, c.insert)
 router.put('/:id', paramValidation, validation, c.updateById)

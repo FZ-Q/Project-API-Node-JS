@@ -81,6 +81,6 @@ exports.remove = (req, res, next) => {
         .catch(err => next(err))
 }
 
-exports.cekTansportasiId = (id) => {
+exports.cekTransportasiId = (id) => {
     return Transportasi.findById(id);
 }

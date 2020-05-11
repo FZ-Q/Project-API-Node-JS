@@ -140,3 +140,7 @@ exports.findByEmail = (value) => {
         email: value
     });
 }
+
+exports.cekAdminId = (id) => {
+    return Status.findById(id);
+}

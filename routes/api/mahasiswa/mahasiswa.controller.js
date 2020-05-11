@@ -110,6 +110,6 @@ exports.removeById = (req, res, next) => {
     }
 }
 
-exports.cekMahsiswaId = (id) => {
+exports.cekMahasiswaId = (id) => {
     return Mahasiswa.findById(id);
 }

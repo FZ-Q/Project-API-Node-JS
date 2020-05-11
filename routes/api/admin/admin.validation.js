@@ -8,8 +8,8 @@ const {
 
 exports.validation = [
     body('email').isEmail().normalizeEmail().withMessage('Email anda tidak valid').custom(value => {
-        return findByEmail(value).then(user => {
-            if (user) {
+        return findByEmail(value).then(admin => {
+            if (admin) {
                 return Promise.reject('Email sudah terdaftar');
             }
         })

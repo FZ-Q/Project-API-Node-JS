@@ -22,95 +22,103 @@
 //     });
 // })
 
-// let idStatus;
-// describe("Status Endpoint With Auth and Id", () => {
-//     it("should get all status", (done) => {
+// let idMahasiswa;
+// describe("Mahasiswa Endpoint With Auth and Id", () => {
+//     it("should get all mahasiswa", (done) => {
 //         chai.request(server)
-//             .get('/api/status')
+//             .get('/api/mahasiswa')
+//         .set('authorization', `Bearer ${token}`)
 //             .set('authorization', `Bearer ${token}`)
 //             .end((err, res) => {
 //                 expect(err).to.be.null;
 //                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
+//                 res.body.should.be.a('array');
 //                 console.log(res.body)
-//                 idStatus = res.body['data'][1]._id;
+//                 idMahasiswa = res.body[1]._id;
 //                 // Harusnya 0 / 1 untuk test
 //                 done();
 //             });
 //     })
-//     it("should get status by id", (done) => {
-//         chai.request(server)
-//             .get('/api/status/' + idStatus)
-//             .set('authorization', `Bearer ${token}`)
-//             .end((err, res) => {
-//                 expect(err).to.be.null;
-//                 res.should.have.status(200);
-//                 res.body.should.have.property('_id');
-//                 res.body._id.should.equal(idStatus);
-//                 console.log(res.body)
-//                 done();
-//             });
-//     })
-//     // it("should insert new status", (done) => {
+//     // it("should get mahasiswa by id", (done) => {
 //     //     chai.request(server)
-//     //         .post('/api/status')
-//     //         .set('authorization', `Bearer ${token}`)
+//     //         .get('/api/mahasiswa/' + idMahasiswa)
+//     //         .end((err, res) => {
+//     //             expect(err).to.be.null;
+//     //             res.should.have.status(200);
+//     //             res.body.should.have.property('_id');
+//     //             res.body._id.should.equal(idMahasiswa);
+//     //             console.log(res.body)
+//     //             done();
+//     //         });
+//     // })
+//     // it("should insert new mahasiswa", (done) => {
+//     //     chai.request(server)
+//     //         .post('/api/mahasiswa')
 //     //         .send({
-//     //             status: 'OTR',
-//     //             deskripsi: 'On The Road'
+//     //             nama: 'Neko',
+//     //             fakultas: '5eb0c4baa9d5fd18f1229f2d',
+//     //             usia: 19,
+//     //             status: '5eb0fdc26233a7511710ab37'
+//     //             // Sesuaikan id masing" value pada db masing"
 //     //         })
 //     //         .end((err, res) => {
 //     //             expect(err).to.be.null;
 //     //             res.should.have.status(200);
 //     //             res.body.should.have.property('message').include('ditambahkan');
 //     //             res.body.should.have.property('data');
+//     //             res.body.data.should.have.property('nama');
+//     //             res.body.data.should.have.property('fakultas');
+//     //             res.body.data.should.have.property('usia');
 //     //             res.body.data.should.have.property('status');
-//     //             res.body.data.should.have.property('deskripsi');
 //     //             console.log(res.body)
 //     //             done();
 //     //         });
 //     // })
-//     // it("should update status by id", (done) => {
+//     // it("should update mahasiswa by id", (done) => {
 //     //     chai.request(server)
-//     //         .put('/api/status/' + idStatus)
-//     //         .set('authorization', `Bearer ${token}`)
+//     //         .put('/api/mahasiswa/' + idMahasiswa)
 //     //         .send({
-//     //             status: 'OTR',
-//     //             deskripsi: 'On The Road1'
+//     //             nama: 'Neko1',
+//     //             fakultas: '5eb0c4baa9d5fd18f1229f2d',
+//     //             usia: 19,
+//     //             status: '5eb0fdc26233a7511710ab37'
+//     //             // Sesuaikan id masing" value pada db masing"
 //     //         })
 //     //         .end((err, res) => {
 //     //             expect(err).to.be.null;
 //     //             res.should.have.status(200);
-//     //             res.body.should.have.property('message').include(idStatus);
+//     //             res.body.should.have.property('message').include(idMahasiswa);
 //     //             res.body.should.have.property('data');
 //     //             res.body.data.should.be.a('object');
 //     //             res.body.data.should.have.property('_id');
-//     //             res.body.data._id.should.equal(idStatus);
+//     //             res.body.data._id.should.equal(idMahasiswa);
+//     //             res.body.data.should.have.property('nama');
+//     //             res.body.data.should.have.property('fakultas');
+//     //             res.body.data.should.have.property('usia');
 //     //             res.body.data.should.have.property('status');
-//     //             res.body.data.should.have.property('deskripsi');
 //     //             console.log(res.body);
 //     //             done();
 //     //         });
 //     // })
-//     // it("should delete status by id", (done) => {
+//     // it("should delete mahasiswa by id", (done) => {
 //     //     chai.request(server)
-//     //         .delete('/api/status/' + idStatus)
+//     //         .delete('/api/mahasiswa/' + idMahasiswa)
 //     //         .set('authorization', `Bearer ${token}`)
 //     //         .end((err, res) => {
 //     //             expect(err).to.be.null;
 //     //             res.should.have.status(200);
-//     //             res.body.should.have.property('message').include(idStatus);
+//     //             res.body.should.have.property('message').include(idMahasiswa);
 //     //             res.body.should.have.property('data');
 //     //             res.body.data.should.be.a('object');
 //     //             res.body.data.should.have.property('_id');
-//     //             res.body.data._id.should.equal(idStatus);
+//     //             res.body.data._id.should.equal(idMahasiswa);
 //     //             console.log(res.body);
 //     //             done();
 //     //         });
 //     // })
-//     // it("should delete status", (done) => {
+//     // it("should delete mahasiswa", (done) => {
 //     //     chai.request(server)
-//     //         .delete('/api/status')
+//     //         .delete('/api/mahasiswa')
 //     //         .set('authorization', `Bearer ${token}`)
 //     //         .end((err, res) => {
 //     //             expect(err).to.be.null;
