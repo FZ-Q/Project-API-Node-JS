@@ -7,12 +7,10 @@ const {
     validation,
     paramValidation
 } = require('./status.validation')
-
 const c = require('./status.controller');
 
-
-router.get('/', auth, c.findAll)
-router.get('/:id', auth, paramValidation, c.findById)
+router.get('/', c.findAll)
+router.get('/:id', paramValidation, c.findById)
 router.post('/', auth, validation, c.insert)
 router.put('/:id', auth, paramValidation, validation, c.updateById)
 router.delete('/', auth, c.remove)
