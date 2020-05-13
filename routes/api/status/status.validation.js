@@ -3,7 +3,7 @@ const {
     param
 } = require('express-validator');
 exports.validation = [
-    body('status').trim().escape(),
+    body('status').escape(),
     body('deskripsi').escape()
 ]
 
