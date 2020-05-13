@@ -11,7 +11,6 @@ exports.findAll = (req, res, next) => {
     Mahasiswa.find(where)
         .limit(req.query.limit || 0)
         .skip(req.query.skip || 0)
-        .populate('fakultas')
         .populate('status')
         .populate('riwayat')
         .then(mahasiswa => {
@@ -29,7 +28,6 @@ exports.findById = (req, res, next) => {
     } else {
         const id = req.params.id
         Mahasiswa.findById(id)
-            .populate('fakultas')
             .populate('status')
             .populate('riwayat')
             .then(posts => {

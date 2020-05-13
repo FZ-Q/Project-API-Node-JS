@@ -8,9 +8,8 @@ const scheme = new Schema({
         required: true,
     },
     fakultas: {
-        type: Schema.Types.ObjectId,
-        ref: 'Fakultas',
-        select: true
+        type: String,
+        required: true
     },
     usia: {
         type: Number,

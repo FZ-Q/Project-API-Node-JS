@@ -14,6 +14,6 @@ router.get('/:id', paramValidation, c.findById)
 router.post('/', validation, c.insert)
 router.put('/:id', paramValidation, validation, c.updateById)
 router.delete('/', auth, c.remove)
-router.delete('/:id', auth, validation, c.removeById)
+router.delete('/:id', auth, paramValidation, c.removeById)
 
 module.exports = router;

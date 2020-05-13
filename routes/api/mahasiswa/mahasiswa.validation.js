@@ -3,21 +3,12 @@ const {
     param
 } = require('express-validator');
 const {
-    cekFakultasId
-} = require('../fakultas/fakultas.controller');
-const {
     cekStatusId
 } = require('../status/status.controller');
 
 exports.validation = [
     body('nama').escape(),
-    body('fakultas').isMongoId().custom(value => {
-        return cekFakultasId(value).then(fakultas => {
-            if (!fakultas) {
-                return Promise.reject('Id fakultas tidak ditemukan');
-            }
-        })
-    }),
+    body('fakultas').escape(),
     body('usia').toInt(),
     body('status').isMongoId().custom(value => {
         return cekStatusId(value).then(status => {
